@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Video Capture</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="author" href="humans.txt">
+    </head>
+    <body>
+     <div style="text-align:center;">
+  <video id="screenshot-stream" class="videostream" autoplay></video>
+  <img id="screenshot" src="">
+  <canvas id="screenshot-canvas" style="display:none;"></canvas>
+  <p><button id="screenshot-button">Capture</button> <button id="screenshot-stop-button">Stop</button></p>
+</div>
+<img src="">
+<canvas style="display:none;"></canvas>
+</body>
+<script>
+ function hasGetUserMedia() {
+  return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+
+if (hasGetUserMedia()) {
+ // alert('getUserMedia() is supported in your browser.');
+} else {
+  alert('getUserMedia() is not supported in your browser.');
+}
+
+ var errorCallback = function(e) {
+    console.log('Reeeejected!', e);
+  };
+
+
+  navigator.getUserMedia  = navigator.getUserMedia ||
+                          navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                          navigator.msGetUserMedia;
+  
+  
+    
+    var video = document.querySelector('video');
+    video.src = window.URL.createObjectURL(localMediaStream);
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    var localMediaStream = null;
+    
+  function snapshot() {
+    if (localMediaStream) {
+      ctx.drawImage(video, 0, 0);
+      // "image/webp" works in Chrome.
+      // Other browsers will fall back to image/png.
+      document.querySelector('img').src = canvas.toDataURL('image/webp');
+    }
+  }
+  
+    
+    video.addEventListener('click', snapshot, false);
+
+// Not showing vendor prefixes or code that works cross-browser.
+   navigator.getUserMedia({video: true}, function(stream) {
+     video.src = window.URL.createObjectURL(stream);
+     localMediaStream = stream;
+   }, errorCallback);
+    // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
+    // See crbug.com/110938.
+
+    video.onloadedmetadata = function(e) {
+      // Ready to go. Do some stuff.
+      console.log('Metadata loaded!', e);
+    };
+
+
+</script>
+</html>
