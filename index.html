@@ -7,25 +7,34 @@
         <title>Video Capture</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="author" href="humans.txt">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     </head>
     <body>
-     <div style="text-align:center;">
+     <div id="container">
+     <div id="oval"></div>
   <video id="screenshot-stream" class="videostream" autoplay></video>
+  <div id="styler"></div>
   <img id="screenshot" src="">
-  <canvas id="screenshot-canvas" style="display:none;"></canvas>
+  <canvas id="screenshot-canvas" style="display: none;"></canvas>
   <p><button id="screenshot-button">Capture</button> <button id="screenshot-stop-button">Stop</button></p>
 </div>
-<img src="">
-<canvas style="display:none;"></canvas>
+<div class="styleselector">
+<a id="cowboy" href="#">cowboy</a> 
+</div>
 </body>
 <script>
 function errorCallback(e) {
   if (e.code == 1) {
     alert('User denied access to their camera');
   } else {
-    alert('getUserMedia() not supported in your browser.');
+    alert('getUserMedia() is not supported in your browser.');
   }
   //e.target.src = 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv';
+}
+
+function hasGetUserMedia() {
+  return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia || navigator.msGetUserMedia);
 }
 
 (function() {
@@ -40,16 +49,21 @@ function sizeCanvas() {
   // video.onloadedmetadata not firing in Chrome so we have to hack.
   // See crbug.com/110938.
   setTimeout(function() {
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    img.height = video.videoHeight;
-    img.width = video.videoWidth;
+    // canvas.width = video.videoWidth;
+    // canvas.height = video.videoHeight;
+    // img.height = video.videoHeight;
+    // img.width = video.videoWidth;
+    canvas.width = 640;
+    canvas.height = 480;
+    img.width = 640;
+    img.height = 480;
   }, 100);
 }
 
 function snapshot() {
   ctx.drawImage(video, 0, 0);
-  img.src = canvas.toDataURL('image/webp');
+  img.src = canvas.toDataURL('image/png');
+  document.getElementById("dataurl").innerHTML = video.videoHeight + canvas.toDataURL('image/png');
 }
 
 button.addEventListener('click', function(e) {
@@ -85,6 +99,12 @@ document.querySelector('#screenshot-stop-button').addEventListener('click', func
 }, false);
 })();
 
+
+$("#cowboy").on("click", function( event ) {
+  event.preventDefault();
+  $('#styler').removeClass();
+  $('#styler').addClass('cowboy');
+});
 </script>
 
 </html>

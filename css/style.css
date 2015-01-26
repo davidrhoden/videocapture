@@ -1,7 +1,7 @@
 
 .videostream, #cssfilters-stream, #screenshot {
-  width: 307px;
-  height: 250px;
+  width: 640px;
+  height: 480px;
 }
 .videostream, #cssfilters-stream {
   background: rgba(255,255,255,0.5);
@@ -9,6 +9,33 @@
 }
 #screenshot {
   vertical-align: top;
+}
+#container {
+  margin: 20px auto;
+  width: 640px;
+  text-align:center; 
+  position: relative;
+}
+
+#oval {
+width: 220px;
+height: 300px;
+left:50%; top:5%; 
+margin-left:-110px; 
+border: 4px dashed red;
+-moz-border-radius: 140px / 200px;
+-webkit-border-radius: 140px / 200px;
+border-radius: 140px / 200px;
+z-index: 10;
+position: absolute;
+}
+
+.cowboy {
+  background: url(../img/cowboy.png) center top no-repeat;
+width: 640px;
+height: 480px;
+z-index: 10;
+position: absolute;
 }
 .blur {
   -webkit-filter: blur(3px);
