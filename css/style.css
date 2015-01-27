@@ -37,6 +37,15 @@ height: 480px;
 z-index: 10;
 position: absolute;
 }
+
+.girl {
+  background: url(../img/girl.png) center top no-repeat;
+width: 640px;
+height: 480px;
+z-index: 10;
+position: absolute;
+}
+
 .blur {
   -webkit-filter: blur(3px);
   -moz-filter: blur(3px);

@@ -20,6 +20,7 @@
 </div>
 <div class="styleselector">
 <a id="cowboy" href="#">cowboy</a> 
+<a id="girl" href="#">girl</a> 
 </div>
 </body>
 <script>
@@ -104,6 +105,12 @@ $("#cowboy").on("click", function( event ) {
   event.preventDefault();
   $('#styler').removeClass();
   $('#styler').addClass('cowboy');
+});
+
+$("#girl").on("click", function( event ) {
+  event.preventDefault();
+  $('#styler').removeClass();
+  $('#styler').addClass('girl');
 });
 </script>
 
