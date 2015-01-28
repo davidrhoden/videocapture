@@ -22,6 +22,11 @@
 <a id="cowboy" href="#">cowboy</a> 
 <a id="girl" href="#">girl</a> 
 </div>
+<form action="greenscreen.php" method="POST" onSubmit="fillFields()">
+<input type="hidden" name="underlay" id="underlay" value="">
+<input type="hidden" name="overlay" id="overlay" value="">
+<input type="submit" name="submit"  value="export photo">
+</form>
 </body>
 <script>
 function errorCallback(e) {
@@ -50,10 +55,6 @@ function sizeCanvas() {
   // video.onloadedmetadata not firing in Chrome so we have to hack.
   // See crbug.com/110938.
   setTimeout(function() {
-    // canvas.width = video.videoWidth;
-    // canvas.height = video.videoHeight;
-    // img.height = video.videoHeight;
-    // img.width = video.videoWidth;
     canvas.width = 640;
     canvas.height = 480;
     img.width = 640;
@@ -64,7 +65,9 @@ function sizeCanvas() {
 function snapshot() {
   ctx.drawImage(video, 0, 0);
   img.src = canvas.toDataURL('image/png');
-  document.getElementById("dataurl").innerHTML = video.videoHeight + canvas.toDataURL('image/png');
+ // document.getElementById("dataurl").innerHTML = video.videoHeight + canvas.toDataURL('image/png');
+  document.getElementById("screenshot").innerHTML = video.videoHeight + canvas.toDataURL('image/png');
+
 }
 
 button.addEventListener('click', function(e) {
@@ -112,6 +115,13 @@ $("#girl").on("click", function( event ) {
   $('#styler').removeClass();
   $('#styler').addClass('girl');
 });
+
+function fillFields() {
+  alert($('#screenshot').attr('src'));
+  $('#overlay').attr("value") = $('#styler').attr('class');
+  $('#underlay').attr("value") = $('#screenshot').attr('src');
+  alert("value: " + $('#overlay').attr("value"));
+}
 </script>
 
 </html>

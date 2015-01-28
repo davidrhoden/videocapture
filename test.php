@@ -19,10 +19,10 @@ $draw->pushPattern('gradient', 0, 0, 50, 50);
 $draw->composite(Imagick::COMPOSITE_OVER, 0, 0, 50, 50, $im);
 
 /* Close the pattern */
-$draw->popPattern();
+//$draw->popPattern();
 
 /* Use the pattern called "gradient" as the fill */
-$draw->setFillPatternURL('#gradient');
+//$draw->setFillPatternURL('#gradient');
 
 /* Set font size to 52 */
 $draw->setFontSize(52);

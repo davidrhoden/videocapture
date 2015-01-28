@@ -1,12 +1,18 @@
-<?php phpinfo(); 
-//header('Content-type: image/jpeg');
+<?php 
+error_reporting(E_ALL); 
+ini_set( 'display_errors','1');
+echo "over: "  . $_POST["overlay"];
+echo "<br>under: " . $_POST["underlay"];
+// header('Content-type: image/jpeg');
 
-$topbar = new Imagick("img/cowboy.png");
-$tapir = new Imagick("img/grnscrnmale.jpg");
+// $underlay = new Imagick("img/cowboy.png");
+// $overlay = new Imagick("img/girl.png");
 
-$tapir->compositeImage($topbar, Imagick::COMPOSITE_OVER, 0, 0);
-echo $tapir;
+
+$underlay = new Imagick('<?php echo $_POST["underlay"]; ?>');
+$overlay = new Imagick('<?php echo $_POST["overlay"]; ?>');
+
+$underlay->compositeImage($overlay, Imagick::COMPOSITE_OVER, 0, 0);
+echo $underlay;
 ?>
-
-<?php phpinfo(); ?>
 
